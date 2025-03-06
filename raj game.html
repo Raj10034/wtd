@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arithmetic Operation Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+      flex-direction: column;
+    }
+    .game-container {
+      text-align: center;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      width: 300px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .question {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .input-container {
+      margin-bottom: 20px;
+    }
+    input {
+      padding: 10px;
+      font-size: 1rem;
+      width: 60px;
+      text-align: center;
+      margin-right: 10px;
+    }
+    select {
+      padding: 10px;
+      font-size: 1rem;
+      width: 80px;
+      margin-right: 10px;
+    }
+    .btn {
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .restart-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .restart-btn:hover {
+      background-color: #218838;
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 1rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="game-container">
+    <h1>Arithmetic Operation Game</h1>
+    <div class="question" id="question">Enter two numbers and choose an operation:</div>
+    <div class="input-container">
+      <input type="number" id="num1" placeholder="Value 1">
+      <input type="number" id="num2" placeholder="Value 2">
+      <select id="operation">
+        <option value="add">Addition (+)</option>
+        <option value="subtract">Subtraction (-)</option>
+        <option value="multiply">Multiplication (×)</option>
+        <option value="divide">Division (÷)</option>
+      </select>
+    </div>
+    <button class="btn" onclick="generateQuestion()">Generate Question</button>
+    <button class="restart-btn" onclick="startNewGame()">Restart Game</button>
+  </div>
+
+  <!-- Footer with creator's name -->
+  <footer>
+    <p>Created by Raj Patel</p>
+  </footer>
+
+  <script>
+    let correctAnswer = 0;
+    let num1, num2, operation;
+
+    // Function to generate the question based on user input
+    function generateQuestion() {
+      num1 = parseFloat(document.getElementById('num1').value);
+      num2 = parseFloat(document.getElementById('num2').value);
+      operation = document.getElementById('operation').value;
+      
+      if (isNaN(num1) || isNaN(num2)) {
+        alert("Please enter valid numbers for both values!");
+        return;
+      }
+
+      let questionText = `${num1} `;
+      let answer;
+      
+      // Perform the selected operation
+      if (operation === "add") {
+        questionText += `+ ${num2}`;
+        answer = num1 + num2;
+      } else if (operation === "subtract") {
+        questionText += `- ${num2}`;
+        answer = num1 - num2;
+      } else if (operation === "multiply") {
+        questionText += `× ${num2}`;
+        answer = num1 * num2;
+      } else if (operation === "divide") {
+        if (num2 === 0) {
+          alert("Cannot divide by zero!");
+          return;
+        }
+        questionText += `÷ ${num2}`;
+        answer = num1 / num2;
+      }
+
+      correctAnswer = answer;
+      
+      // Display the question
+      document.getElementById('question').textContent = `What is: ${questionText}?`;
+
+      // Prompt user for the answer
+      let playerAnswer = parseFloat(prompt(`What is the answer to: ${questionText}?`));
+      
+      // Check the player's answer
+      if (playerAnswer === correctAnswer) {
+        alert("Correct! Well done.");
+      } else {
+        alert(`Oops! Incorrect answer. The correct answer is ${correctAnswer}.`);
+      }
+    }
+
+    // Function to start a new game
+    function startNewGame() {
+      correctAnswer = 0;
+      document.getElementById('num1').value = '';
+      document.getElementById('num2').value = '';
+      document.getElementById('operation').value = 'add';
+      document.getElementById('question').textContent = "Enter two numbers and choose an operation:";
+    }
+
+    // Start the game when the page loads
+    window.onload = startNewGame;
+  </script>
+
+</body>
+</html>

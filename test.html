@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovative Web Design</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Font for Custom Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        body {
+            background-color: #f7f7f7;
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: #007BFF;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 15px;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+        nav a:hover {
+            background: #FF6F61;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Marquee Section */
+        marquee {
+            background: #FF6F61;
+            color: white;
+            padding: 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Main Content */
+        .main-content h1 {
+            font-size: 3rem;
+            color: #007BFF;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .lead {
+            font-size: 1.25rem;
+            color: #666;
+        }
+
+        /* About Us Section */
+        .about-content, .contact-us-content, .timetable-content, .marksheet-content {
+            display: none;
+            margin-top: 30px;
+            text-align: left;
+            padding: 20px;
+            background-color: #e3f2fd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .about-img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 15px;
+            padding: 8px 20px;
+            border-radius: 5px;
+            transition: color 0.3s ease, background 0.3s ease;
+        }
+        footer a:hover {
+            color: #FF6F61;
+            background: white;
+        }
+
+        /* Table Styles */
+        th {
+            border: 3px solid #000b0b;
+            padding: 10px;
+        }
+        td {
+            border: 3px solid #000c0c;
+            padding: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 3px solid #000107;
+            background-color: #ec1818ab;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* Result Specific Styles */
+        .marksheet-content {
+            background-color: #f3f8ff;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .marksheet-content h1 {
+            color: #FF6F61;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .marksheet-content table {
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .marksheet-content table th, .marksheet-content table td {
+            text-align: center;
+            padding: 12px;
+        }
+
+        .marksheet-content table th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .marksheet-content table td {
+            background-color: #f9f9f9;
+        }
+
+        .marksheet-content .summary {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+
+        .marksheet-content .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Control the size of the logo */
+        .header-logo img {
+            width: 100px; /* Adjust width to your desired size */
+            max-width: 100%; /* Ensures it scales responsively */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav a {
+                margin: 10px;
+                font-size: 16px;
+            }
+            .main-content h1 {
+                font-size: 2.5rem;
+            }
+            .about-content, .contact-us-content, .timetable-content {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand text-white" href="#" onclick="showHome()">My Website</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" onclick="showHome()"><i class="bi bi-house-door"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" onclick="showAboutUs()"><i class="bi bi-info-circle"></i> About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" onclick="showContactUs()"><i class="bi bi-envelope"></i> Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" onclick="showTimeTable()"><i class="bi bi-calendar-check"></i> TimeTable</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" onclick="showResult()">Result</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Marquee Section -->
+    <marquee>Stay tuned for exciting updates and new developments—don’t miss out!</marquee>
+    
+    <!-- Main Content -->
+    <div class="container mt-5 main-content" id="mainContent">
+        <h1>"Hello and welcome! Let’s create something amazing together!"</h1>
+        <p class="lead">Explore our website to learn more about creative projects and innovation.</p>
+    </div>
+
+    <!-- About Us Section -->
+    <div class="container about-content" id="aboutUsContent">
+        <h2 class="text-info">About the Project</h2>
+        <img src="C:\Users\mrraj\Pictures\Screenshots\Raj DIY Bike.png" alt="Bicycle Conversion Project" class="about-img">
+        <p><strong>Raj (Age 14 Years)</strong> successfully converted his bicycle into an electric bike! This DIY project is a perfect example of innovation, creativity, and technical skills. Below is a video showing the entire process of conversion.</p>
+        <p>Watch the video to see how Raj completed this amazing project:</p>
+        <a href="https://www.youtube.com/embed/joAbUgb1vWk?si=zUC1VdJikkQqSd1U" class="btn btn-primary">Watch Video</a>
+    </div>
+
+    <!-- Contact Us Section -->
+    <div class="container contact-us-content" id="contactUsContent">
+        <h2 class="text-info">Contact Us</h2>
+        <p>Your inquiry is important to us. Get in touch today!</p>
+        <p><strong>Raj Patel</strong></p>
+        <p>Email: <a href="mailto:202307010034@karnavatiuniversity.edu.in">202307010034@karnavatiuniversity.edu.in</a></p>
+    </div>
+
+    <!-- Time Table Section -->
+    <div class="container timetable-content" id="timetableContent">
+        <h2 style="text-align: center; color: #e9411b;">Time Table</h2>
+        <table>
+            <tr style="background-color: #f6ef25; color: rgb(0, 0, 0);">
+                <th>DAY</th>
+                <th>11:00- 11:50</th>
+                <th>11:50- 12:40</th>
+                <th>01:30- 2:20</th>
+                <th>02:20- 03:10</th>
+                <th>3:30- 04:10</th>
+                <th>04:10-5:00</th>
+                <th>Extra</th>
+            </tr>
+            <tr>
+                <th>Monday</th>
+                <td>ML</td>
+                <td>ML</td>
+                <td>WTD</td>
+                <td>WTD</td>
+                <td>FREE</td>
+                <td>Java</td>
+                <td>Self-study</td>
+            </tr>
+            <tr>
+                <th>Tuesday</th>
+                <td>Java</td>
+                <td>NSS/NCC</td>
+                <td>OS</td>
+                <td>WTD</td>
+                <td>Java</td>
+                <td>Java</td>
+                <td>Self-study</td>
+            </tr>
+            <tr>
+                <th>Wednesday</th>
+                <td>OS</td>
+                <td>FREE</td>
+                <td>WTD</td>
+                <td>SMBW</td>
+                <td>Maths</td>
+                <td>ML</td>
+                <td>Self-study</td>
+            </tr>
+            <tr>
+                <th>Thursday</th>
+                <td>OS</td>
+                <td>FREE</td>
+                <td>WTD</td>
+                <td>Java</td>
+                <td>SMBW</td>
+                <td>ML</td>
+                <td>Self-study</td>
+            </tr>
+            <tr>
+                <th>Friday</th>
+                <td>FREE</td>
+                <td>ML</td>
+                <td>OS</td>
+                <td>Maths</td>
+                <td>NSS/NCC</td>
+                <td>NSS/NCC</td>
+                <td>Self-study</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Marksheet Section -->
+    <div class="container marksheet-content" id="marksheetContent">
+        <div class="header-logo">
+            <!-- Adjusted logo size -->
+            <img src="C:\Users\mrraj\Downloads\kulogo.jpg" alt="Karnavati University" width="100"> 
+        </div>
+
+        <h1>Marksheet</h1>
+
+        <!-- Student Information -->
+        <div class="student-info">
+            <p><strong>Student Name:</strong> Patel Raj Jignesh</p>
+            <p><strong>Roll Number:</strong> 202307010034</p>
+            <p><strong>Course:</strong> B.Sc. Computer Science</p>
+            <p><strong>Year:</strong> 2024</p>
+        </div>
+
+        <!-- Marks Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Max Marks</th>
+                    <th>Marks Obtained</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Social Media and Blog Writing</td>
+                    <td>100</td>
+                    <td>85</td>
+                    <td>A</td>
+                </tr>
+                <tr>
+                    <td>Machine Learning</td>
+                    <td>100</td>
+                    <td>75</td>
+                    <td>B</td>
+                </tr>
+                <tr>
+                    <td>Java programming</td>
+                    <td>100</td>
+                    <td>80</td>
+                    <td>A</td>
+                </tr>
+                <tr>
+                    <td>Web Technology and Design</td>
+                    <td>100</td>
+                    <td>90</td>
+                    <td>A+</td>
+                </tr>
+                <tr>
+                    <td>Quantitative Aptitude and Data Interpretation</td>
+                    <td>100</td>
+                    <td>70</td>
+                    <td>B+</td>
+                </tr>
+                <tr>
+                    <td>Operating System</td>
+                    <td>100</td>
+                    <td>88</td>
+                    <td>A</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="summary">
+            <p><strong>Total Marks:</strong> 500</p>
+            <p><strong>Marks Obtained:</strong> 488</p>
+            <p><strong>Grade:</strong> A+</p>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Official Statement:</strong> This is a computer-generated marksheet and does not require a signature.</p>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 My Website. All rights reserved.</p>
+        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        // JavaScript functions to show/hide sections
+        function showHome() {
+            document.getElementById('mainContent').style.display = 'block';
+            document.getElementById('aboutUsContent').style.display = 'none';
+            document.getElementById('contactUsContent').style.display = 'none';
+            document.getElementById('timetableContent').style.display = 'none';
+            document.getElementById('marksheetContent').style.display = 'none';
+        }
+
+        function showAboutUs() {
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('aboutUsContent').style.display = 'block';
+            document.getElementById('contactUsContent').style.display = 'none';
+            document.getElementById('timetableContent').style.display = 'none';
+            document.getElementById('marksheetContent').style.display = 'none';
+        }
+
+        function showContactUs() {
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('aboutUsContent').style.display = 'none';
+            document.getElementById('contactUsContent').style.display = 'block';
+            document.getElementById('timetableContent').style.display = 'none';
+            document.getElementById('marksheetContent').style.display = 'none';
+        }
+
+        function showTimeTable() {
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('aboutUsContent').style.display = 'none';
+            document.getElementById('contactUsContent').style.display = 'none';
+            document.getElementById('timetableContent').style.display = 'block';
+            document.getElementById('marksheetContent').style.display = 'none';
+        }
+
+        function showResult() {
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('aboutUsContent').style.display = 'none';
+            document.getElementById('contactUsContent').style.display = 'none';
+            document.getElementById('timetableContent').style.display = 'none';
+            document.getElementById('marksheetContent').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

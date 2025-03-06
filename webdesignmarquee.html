@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Web Page</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background-color: #F1F1F2; text-align: center; }
+        
+        /* Navigation Bar */
+        nav { background: #ab1163; padding: 15px; }
+        nav a { 
+            color: white; 
+            text-decoration: none; 
+            margin: 20px; 
+            font-size: 18px; 
+            display: inline-block; 
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        nav a:hover { background: #A1D6E2; color: #1995AD; transition: 0.3s; }
+        
+        /* Marquee Section */
+        marquee { 
+            background: #A1D6E2; 
+            color: #1995AD; 
+            padding: 10px; 
+            font-size: 18px; 
+            font-weight: bold; 
+        }
+        
+        /* Main Content */
+        .content { padding: 40px; display: block; }
+        .content h1 { color: #1995AD; margin-bottom: 10px; }
+        .content p { font-size: 18px; color: #333; }
+
+        /* Iframe Container */
+        .iframe-container { margin-top: 20px; }
+        iframe { 
+            width: 80%; 
+            height: 500px; 
+            border: 2px solid #1995AD; 
+            display: none; 
+            margin: 20px auto; 
+            background: white;
+        }
+
+        /* Footer */
+        footer { 
+            background: #1995AD; 
+            color: white; 
+            text-align: center; 
+            padding: 15px; 
+            margin-top: 20px; 
+        }
+        footer a { 
+            color: white; 
+            text-decoration: none; 
+            margin: 10px; 
+            font-size: 18px; 
+            display: inline-block; 
+            padding: 5px 10px;
+        }
+        footer a:hover { text-decoration: underline; color: #A1D6E2; transition: 0.3s; }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav>
+        <a href="#" onclick="showHome()">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#your-choice">Your Choice</a>
+        <a href="#contact">Contact Us</a>
+    </nav>
+    
+    <!-- Marquee Section -->
+    <marquee>Welcome to my website</marquee>
+    
+    <!-- Main Content -->
+    <div class="content" id="mainContent">
+        <h1>Welcome to Our Website</h1>
+        <p>Check Timetable and Result</p>
+    </div>
+
+    <!-- Iframe Container -->
+    <div class="iframe-container">
+        <iframe id="displayFrame" src=""></iframe>
+    </div>
+    
+    <!-- Footer Section -->
+    <footer>
+        <a href="#" onclick="loadContent('inlinetimetable.html')">TimeTable</a> | 
+        <a href="#" onclick="loadContent('Result.html')">Result</a> 
+    </footer>
+
+    <script>
+        function loadContent(page) {
+            document.getElementById("mainContent").style.display = "none"; // Hide main content
+            var iframe = document.getElementById("displayFrame");
+            iframe.src = page;
+            iframe.style.display = "block"; // Show the iframe
+        }
+
+        function showHome() {
+            document.getElementById("mainContent").style.display = "block"; // Show main content
+            var iframe = document.getElementById("displayFrame");
+            iframe.style.display = "none"; // Hide the iframe
+            iframe.src = ""; // Clear the iframe source
+        }
+    </script>
+</body>
+</html>
